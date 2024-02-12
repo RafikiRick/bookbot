@@ -1,3 +1,3 @@
 # Bookbot
 Boot.dev Bookbot
-Bookbot is my firest git project
+Bookbot is my first git project
