@@ -1,2 +1,2 @@
-# bookbot
+# Bookbot
 Boot.dev Bookbot
