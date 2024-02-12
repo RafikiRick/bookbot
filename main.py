@@ -2,15 +2,16 @@ def main():
     book_path = "books/frankenstein.txt"
     text = get_text(book_path)
     word_count = get_word_count(text)
-    print("--- Begin report of books/frankenstein.txt ---")
-    print(f"{word_count} words in document\n")
-    
     letter_count_dict = get_letter_count(text)
     letter_count_list = dict_to_list(letter_count_dict)
-
     letter_count_list.sort(reverse=True, key=sort_on)
+        
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{word_count} words in document\n")
+
+    for item in letter_count_list:
+        print(f"The '{item["letter"]}' character was found {item["num"]} times ")
     
-    report_builder(letter_count_list)
     print("--- End report --- ")
 
 def get_text(path):
@@ -22,23 +23,23 @@ def get_word_count(text):
     return len(words)
 
 def get_letter_count(text):
-    lower_text = text.lower()
-    letters = {i:lower_text.count(i) for i in lower_text}
-    return letters
+    letter = {}
+    for l in text:
+        if l.isalpha():
+            lowercase = l.lower()
+            if lowercase in letter:
+                letter[lowercase] += 1
+            else:
+                letter[lowercase] = 1
+    return letter
 
 def dict_to_list(dict):
     list_dict = []
     for key,value in dict.items():
-        if str(key).isalpha():
             list_dict.append({"letter":key,"num":value})
     return list_dict
 
 def sort_on(dict):
     return dict["num"]
 
-def report_builder(list):
-    for dict in list:
-        letter = dict["letter"]
-        num = dict["num"]
-        print(f"The '{letter}' character was found {num} times ")
 main()
